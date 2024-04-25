@@ -1,9 +1,15 @@
+<script setup>
+import { vAutoAnimate } from '@formkit/auto-animate'
+</script>
+
 <template>
   <body>
-    <div class="container">
+    <h1>Хранитель имён</h1>
+    <div v-auto-animate class="container">
+
       <section>
-        <input type="text" class="input-group" v-model="inputName" placeholder="Введите имя" >
-        <button @click="addName()" class="btn btn-success">Добавить</button>
+        <input type="text" class="input-group" v-model="inputName" placeholder="Введите имя" @keyup.enter="addName">
+        <button @click="addName" class="btn btn-success">Добавить</button>
       </section>
 
       <ul class="list-group" v-for="name in nameList" :key="name.id">
@@ -20,6 +26,7 @@
 </template>
 
 <script>
+
 export default{
   name : 'App',
   
@@ -79,7 +86,8 @@ body {
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 30px;
+    color: #fff;
 }
 
 input[type="text"] {
