@@ -12,8 +12,8 @@ import { vAutoAnimate } from '@formkit/auto-animate'
         <button @click="addName" class="btn btn-success">Добавить</button>
       </section>
 
-      <ul class="list-group" v-for="name in nameList" :key="name.id">
-        <li class="list-group-item" v-if="name!=''">
+      <ul class="list-group" v-for="name in nameList" :key="name.uid">
+        <li class="list-group-item">
           {{ name }}
           <button class="btn btn-danger" @click="() => deleteName(name)">
             Удалить
@@ -30,6 +30,16 @@ import { vAutoAnimate } from '@formkit/auto-animate'
 export default{
   name : 'App',
   
+  computed: {
+    filteredNames() {
+      const { names, filterId } = this
+      return Object.values(names)
+        .filter(name => parseInt(name.pubdate.substring(0,4)) >= filterId)
+    }
+  },
+
+
+
   data(){
     return{
       inputName: '',
@@ -64,7 +74,6 @@ export default{
 
   }
 }
-
 </script>
 
 <style>
